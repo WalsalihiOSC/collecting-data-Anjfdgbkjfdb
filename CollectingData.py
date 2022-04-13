@@ -3,67 +3,67 @@ from tkinter import *
 
 class gui:
     def __init__(self, parent): 
-        self.f1=Frame(parent)
+        data.setup(self)
+    # Frame 1 =====================================================================================================
+        gui.f1=Frame(parent)
         self.f1.grid()
-        Label(self.f1,text="name").grid()
-        gui.name = Entry (self.f1,width=20)
+        Label(gui.f1,text="name").grid()
+        gui.name = Entry (gui.f1,width=20)
         gui.name.grid()
-
-        Label(self.f1,text="age").grid()
-        gui.age = Entry (self.f1,width=20)
+        Label(gui.f1,text="age").grid()
+        gui.age = Entry (gui.f1,width=20)
         gui.age.grid()  
-
-        gui.select=StringVar()
-        gui.select.set(0)
-        self.ans = ['Yes','No']
-        for item in self.ans:
-            gui.input=Radiobutton(self.f1,text=item,value=item,variable = gui.select)
+        for item in data.ans:
+            gui.input=Radiobutton(gui.f1,text=item,value=item,variable = data.select)
             gui.input.grid()
-
-        enter=Button(self.f1,text="save",command=self.save)
+        enter=Button(gui.f1,text="save",command=data.save)
         enter.grid()
-        Button(self.f1,text="show", command=self.show).grid()
+        Button(gui.f1,text="show", command=data.show).grid()
         gui.info = [""""""]
 
-        #==================================================================================================================================================
-        #==================================================================================================================================================
-        self.f2=Frame(parent)
-        self.f2.grid()
-        self.f2.grid_forget()
-        self.i=0
-        Button(self.f2,text="Enter data", command=self.enter_data).grid()
-        Button(self.f2,text="next", command=self.next).grid()
-        Button(self.f2,text="prev", command=self.prev).grid()
-
-
-    def next(self):
-        #print(gui.info[0])
-        self.i=self.i + 1
-        Label(self.f2, text=gui.info[self.i]).grid()
-
-    
-    def prev(self):
-        #print(gui.info[0])
-        self.i=self.i - 1
-        Label(self.f2, text=gui.info[self.i]).grid()
-
-        #==================================================================================================================================================
-        #==================================================================================================================================================
-
-
-    def save(self):
-        gui.info.append([gui.name.get(), gui.age.get()  ,gui.select.get() ])        
+        # Frame 2 ========================================================================================================
         
-    def show(self):
-        self.f1.grid_forget()
-        self.f2.grid()
+        gui.f2=Frame(parent)
+        gui.f2.grid()
+        gui.f2.grid_forget()
+        Button(gui.f2,text="Enter data", command=data.enter_data).grid()
+        Button(gui.f2,text="next", command=data.next).grid()
+        Button(gui.f2,text="prev", command=data.prev).grid()
 
-    def enter_data(self):
-        self.f2.grid_forget()
-        self.f1.grid()
+
+
+class data:
+    def setup(self): 
+        data.i=0
+        data.select=StringVar()
+        data.select.set(0)
+        data.ans = ['Yes','No']
+
+    def save():
+        gui.info.append([gui.name.get(), gui.age.get()  ,data.select.get()]) 
+        gui.name.delete(0, END) 
+        gui.age.delete(0, END) 
+        data.select.set(0)
+
+    def show():
+        gui.f1.grid_forget()
+        gui.f2.grid()
+
+    def enter_data():
+        gui.f2.grid_forget()
+        gui.f1.grid()
+
+
+    def next():
+        #print(gui.info[0])
+        data.i=data.i + 1
+        Label(gui.f2, text=gui.info[data.i]).grid()
 
     
-
+    def prev():
+        #print(gui.info[0])
+        data.i=data.i - 1
+        Label(gui.f2, text=gui.info[data.i]).grid()
 
 
 root = Tk()
