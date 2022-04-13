@@ -27,6 +27,8 @@ class gui:
         gui.f2.grid()
         gui.f2.grid_forget()
         Button(gui.f2,text="Enter data", command=data.enter_data).grid()
+        gui.info_text=Label(gui.f2, text="")
+        gui.info_text.grid()
         Button(gui.f2,text="next", command=data.next).grid()
         Button(gui.f2,text="prev", command=data.prev).grid()
 
@@ -55,16 +57,12 @@ class data:
 
 
     def next():
-        #print(gui.info[0])
         data.i=data.i + 1
-        Label(gui.f2, text=gui.info[data.i]).grid()
-
+        gui.info_text.configure(text=gui.info[data.i])
     
     def prev():
-        #print(gui.info[0])
         data.i=data.i - 1
-        Label(gui.f2, text=gui.info[data.i]).grid()
-
+        gui.info_text.configure(text=gui.info[data.i])
 
 root = Tk()
 gui(root)
